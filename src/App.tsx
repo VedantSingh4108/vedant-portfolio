@@ -116,7 +116,7 @@ const Hero = () => {
             Electronics & Computer Engineer
           </h2>
           <p className="hero-description">
-            B.Tech student at VIT Chennai (9.09 CGPA) with a passion for C++, Data Science, and creating optimized, real-world solutions with AI.
+            B.Tech student at VIT Chennai (9.09 CGPA) with a passion for JAVA, Data Science, and creating optimized, real-world solutions with AI.
           </p>
           
           {/* Social Links */}
@@ -165,11 +165,11 @@ const Skills = () => {
     },
     { 
       title: "Data Science & Analytics", 
-      skills: ["Pandas", "Seaborn", "SQL", "Kaggle"] 
+      skills: ["Pandas", "SQL"] 
     },
     { 
       title: "Cloud & AI", 
-      skills: ["Microsoft Azure", "Azure AI", "Machine Learning", "NLP"] 
+      skills: ["Microsoft Azure", "Azure AI", "Machine Learning"] 
     },
     { 
       title: "UI/UX", 
@@ -253,27 +253,27 @@ const Projects = () => {
   const projectData: Project[] = [
     {
       title: "RockGuard AI: Rockfall Prediction System",
-      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas.",
+      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas,using synthethic data to train the model.",
       tags: ["AI/ML", "Python", "Data Analysis", "SIH 2025"],
       githubLink: "https://github.com/VedantSingh4108" // <-- Update this link
     },
     {
-      title: "Personalized AI Chatbot",
-      description: "A fully functional, personalized AI assistant to manage tasks and answer custom queries. (Currently in development).",
+      title: "Cronos - AI -> Personalized AI Chatbot",
+      description: "Cronos AI: An intelligent personal voice assistant built with Python. Features offline hotword detection ('Cronos') using Porcupine, voice command recognition via Google Speech Recognition, and integration with the Google Gemini API for handling complex queries. Capable of opening local applications and websites, providing the current time and date, and answering natural language questions.",
       tags: ["Python", "AI", "NLP", "In Progress"],
+      githubLink: "https://github.com/VedantSingh4108/Cronos-AI"
+    },
+    {
+      title: "Diabetes Predictor using Machine Learning",
+      description: "This project predicts diabetes using the PIMA dataset. After thorough EDA, I addressed challenges like hidden missing values (imputing zeros with medians), outliers (using IQR capping), and class imbalance (applying SMOTE to training data). Features were scaled using StandardScaler. A Logistic Regression model was trained and evaluated using accuracy, confusion matrix, and classification report metrics.",
+      tags: ["Python", "Data Analysis", "Machine Learning", "Pandas", "Scikit-Learn"],
       githubLink: "https://github.com/VedantSingh4108" // <-- Update this link
     },
     {
       title: "Traffic Management Simulation",
       description: "Interactive C++ simulation of a city grid with an adaptive algorithm to optimize traffic signal switching.",
       tags: ["C++", "OOP", "Data Structures", "Optimization"],
-      githubLink: "https://github.com/VedantSingh4108" // <-- Update this link
-    },
-    {
-      title: "Restaurant Management System",
-      description: "A comprehensive waitlist system leveraging a circular queue to ensure First-In, First-Out (FIFO) customer service.",
-      tags: ["C/C++", "Data Structures", "Algorithms"],
-      githubLink: "https://github.com/VedantSingh4108" // <-- Update this link
+      githubLink: "https://github.com/VedantSingh4108/Traffic-Management-System" 
     },
   ];
 

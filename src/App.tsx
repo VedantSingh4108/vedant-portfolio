@@ -165,7 +165,7 @@ const Skills = () => {
     },
     { 
       title: "Data Science & Analytics", 
-      skills: ["Oracle", "SQL","Python Data Science Stack","Machine Learning Frameworks"] 
+      skills: ["Oracle", "SQL","Python Data Science Stack","Machine Learning"] 
     },
     { 
       title: "Cloud & AI", 

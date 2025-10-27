@@ -141,7 +141,7 @@ const Hero = () => {
               href="#projects"
               className="button button-primary"
             >
-              View My Projects
+              My Projects
             </a>
             <a
               href="#contact"
@@ -165,15 +165,15 @@ const Skills = () => {
     },
     { 
       title: "Data Science & Analytics", 
-      skills: ["Pandas", "SQL"] 
+      skills: ["Oracle", "SQL","Python Data Science Stack","Machine Learning Frameworks"] 
     },
     { 
       title: "Cloud & AI", 
-      skills: ["Microsoft Azure", "Azure AI", "Machine Learning"] 
+      skills: ["Microsoft Azure", "Azure AI"] 
     },
     { 
       title: "UI/UX", 
-      skills: ["Figma"] 
+      skills: ["Figma","React","NodeJS"] 
     },
   ];
 

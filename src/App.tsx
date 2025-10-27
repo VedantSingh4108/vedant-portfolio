@@ -260,7 +260,7 @@ const Projects = () => {
     {
       title: "Cronos - AI -> Personalized AI Chatbot",
       description: "Cronos AI: An intelligent personal voice assistant built with Python. Features offline hotword detection ('Cronos') using Porcupine, voice command recognition via Google Speech Recognition, and integration with the Google Gemini API for handling complex queries. Capable of opening local applications and websites, providing the current time and date, and answering natural language questions.",
-      tags: ["Python", "AI", "NLP", "In Progress"],
+      tags: ["Python", "AI", "NLP"],
       githubLink: "https://github.com/VedantSingh4108/Cronos-AI"
     },
     {

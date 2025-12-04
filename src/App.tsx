@@ -9,7 +9,6 @@ import {
   ArrowUpRight, 
   Award, 
   CheckCircle, 
-  Briefcase, 
   GraduationCap 
 } from 'lucide-react';
 

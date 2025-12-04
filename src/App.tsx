@@ -254,28 +254,28 @@ const Projects = () => {
       description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas,using synthethic data to train the model.",
       tags: ["AI/ML", "Python", "Data Analysis", "SIH 2025"],
       githubLink: "https://github.com/VedantSingh4108/Open_Pit_Rockfall", // <-- Update this link
-      image:"C:\Users\vedan\vedant-portfolio\Rockfall.png"
+      image:"/images/rockfall.png"
     },
     {
       title: "Cronos - AI -> Personalized AI Chatbot",
       description: "Cronos AI: An intelligent personal voice assistant built with Python. Features offline hotword detection ('Cronos') using Porcupine, voice command recognition via Google Speech Recognition, and integration with the Google Gemini API for handling complex queries. Capable of opening local applications and websites, providing the current time and date, and answering natural language questions.",
       tags: ["Python", "AI", "NLP"],
       githubLink: "https://github.com/VedantSingh4108/Cronos-AI",
-      image:"C:\Users\vedan\vedant-portfolio\Chatbot.png"
+      image:"/images/chatbot.png"
     },
     {
       title: "Diabetes Predictor using Machine Learning",
       description: "Built a machine learning pipeline to predict diabetes onset using the PIMA Indians Diabetes dataset. ADDRESSED critical data issues like missing values (imputed medians) and class imbalance (SMOTE). Benchmarked Logistic Regression (71% accuracy) against Random Forest (77% accuracy) to demonstrate the necessity of non-linear modeling for health data.  Key Highlight: Went beyond simple prediction by conducting a comparative study on Model Explainability (XAI). Demonstrated the mathematical instability of LIME (low fidelity scores) and implemented SHAP (Shapley Additive Explanations) to provide robust, game-theoretic explanations for feature importance (identifying Glucose, BMI, and Age as top drivers).",
       tags: ["Python", "Machine Learning", "Pandas", "Scikit-Learn","Lime-Shap Analysis"],
       githubLink: "https://github.com/VedantSingh4108/Diabetes-predictor",// <-- Update this link
-      image:"C:\Users\vedan\vedant-portfolio\Diabetes.png"
+      image:"/images/diabetes.png"
     },
     {
       title: "Traffic Management Simulation",
       description: "Interactive C++ simulation of a city grid with an adaptive algorithm to optimize traffic signal switching.",
       tags: ["C++", "OOP", "Data Structures", "Optimization"],
       githubLink: "https://github.com/VedantSingh4108/Traffic-Management-System" ,
-      image:"C:\Users\vedan\vedant-portfolio\Traffic.png"
+      image:"/images/traffic.png"
     },
   ];
 

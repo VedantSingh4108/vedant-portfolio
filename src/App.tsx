@@ -62,7 +62,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Vedant_Singh_Resume.pdf" // <-- Add your resume PDF to 'public' folder
+            href="/Vedant_Singh_Resume_.pdf" // 'public' folder
             download
             className="button button-primary"
           >

@@ -112,6 +112,8 @@ const Hero = () => {
   return (
     <section id="about" className="hero-section">
       <div className="container hero-container">
+        
+        {/* Left Side: Text */}
         <div className="hero-content">
           <h1 className="hero-headline">
             Vedant Singh
@@ -123,7 +125,6 @@ const Hero = () => {
             B.Tech student at VIT Chennai (9.14 CGPA) with a passion for Java, Data Science, and creating optimized, real-world solutions with AI.
           </p>
           
-          {/* Social Links */}
           <div className="hero-socials">
             <a href="https://github.com/VedantSingh4108" target="_blank" rel="noopener noreferrer">
               <Github size={28} />
@@ -139,27 +140,31 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* CTA Buttons */}
           <div className="hero-buttons">
-            <a
-              href="#projects"
-              className="button button-primary"
-            >
+            <a href="#projects" className="button button-primary">
               My Projects
             </a>
-            <a
-              href="#contact"
-              className="button button-secondary"
-            >
+            <a href="#contact" className="button button-secondary">
               Contact Me
             </a>
           </div>
         </div>
+
+        {/* Right Side: Image */}
+        <div className="hero-image-wrapper">
+          <div className="hero-image-blob">
+            <img 
+              src="/images/Profile.jpg" 
+              alt="Vedant Singh" 
+              className="hero-img"
+            />
+          </div>
+        </div>
+
       </div>
     </section>
   );
 };
-
 // --- COMPONENT: Skills ---
 const Skills = () => {
   const skillCategories = [
@@ -367,7 +372,7 @@ const Education = () => {
                 <Trophy size={24} style={{ flexShrink: 0, marginRight: '12px', marginTop: '4px', color: '#facc15' }} />
                 <div style={{ width: '100%' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <h4 className="certification-title">2nd Rank - [Hackathon Name]</h4>
+                    <h4 className="certification-title">2nd Rank - International Online NetSim 24hrs Hackathon</h4>
                     
                     {/* --- LINK ADDED HERE --- */}
                     <a 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Github, 
   Linkedin, 
@@ -10,29 +10,16 @@ import {
   Award, 
   CheckCircle, 
   GraduationCap,
-  Trophy,
+  Trophy,        
   ExternalLink,
   Check,
-  Copy
+  Copy,
+  Sun,   
+  Moon   
 } from 'lucide-react';
 
-/* This file contains all your components. 
-  The styling is in a separate file (index.css).
-*/
-
-// --- TYPE Definitions for TypeScript ---
-// This defines the "shape" of our project object, fixing the "any" type error.
-type Project = {
-  title: string;
-  description: string;
-  tags: string[];
-  githubLink: string;
-  image: string;
-};
-
-
 // --- COMPONENT: Navbar ---
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme, showThemeNotif, dismissNotif }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -62,7 +49,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Vedant_Singh_Resume_.pdf" // 'public' folder
+            href="/Vedant_Singh_Resume.pdf" 
             download
             className="button button-primary"
           >
@@ -70,15 +57,41 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="navbar-menu-mobile-toggle">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="mobile-menu-button"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        {/* Actions Right (Theme Toggle + Mobile Menu) */}
+        <div className="navbar-actions">
+          
+          {/* THEME TOGGLE & TOOLTIP WRAPPER */}
+          <div className="theme-toggle-wrapper">
+            <button 
+              onClick={toggleTheme} 
+              className="theme-toggle-btn"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+            </button>
+
+            {/* BOUNCING NOTIFICATION TOOLTIP */}
+            {showThemeNotif && (
+              <div className="theme-tooltip">
+                <p><strong>New!</strong> Try Light & Dark modes! ✨</p>
+                <button className="tooltip-close" onClick={dismissNotif}>
+                  Got it
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="navbar-menu-mobile-toggle">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="mobile-menu-button"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
+
       </div>
 
       {/* Mobile Menu (Dropdown) */}
@@ -95,7 +108,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Vedant_Singh_Resume.pdf" // <-- Add your resume PDF to 'public' folder
+            href="/Vedant_Singh_Resume.pdf" 
             download
             className="button button-primary-mobile"
           >
@@ -113,7 +126,6 @@ const Hero = () => {
     <section id="about" className="hero-section">
       <div className="container hero-container">
         
-        {/* Left Side: Text */}
         <div className="hero-content">
           <h1 className="hero-headline">
             Vedant Singh
@@ -154,7 +166,7 @@ const Hero = () => {
         <div className="hero-image-wrapper">
           <div className="hero-image-blob">
             <img 
-              src="/images/Profile.jpg" 
+              src="/images/profile.jpg" 
               alt="Vedant Singh" 
               className="hero-img"
             />
@@ -165,6 +177,7 @@ const Hero = () => {
     </section>
   );
 };
+
 // --- COMPONENT: Skills ---
 const Skills = () => {
   const skillCategories = [
@@ -215,11 +228,10 @@ const Skills = () => {
 };
 
 // --- COMPONENT: Project Card ---
-// We use the "Project" type we defined at the top to fix the TypeScript error.
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+// Removed TypeScript types here
+const ProjectCard = ({ project }) => {
   return (
     <div className="project-card">
-      {/* Dynamic Image Logic */}
       <div className="project-card-visual" style={{ padding: 0, overflow: 'hidden' }}>
         <img 
           src={project.image} 
@@ -256,27 +268,27 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
 // --- COMPONENT: Projects ---
 const Projects = () => {
-  // We tell TypeScript that this array matches the "Project" type.
-  const projectData: Project[] = [
+  // Removed TypeScript types here
+  const projectData = [
     {
       title: "RockGuard AI: Rockfall Prediction System",
-      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas,using synthethic data to train the model.",
+      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas, using synthetic data to train the model.",
       tags: ["AI/ML", "Python", "Data Analysis", "SIH 2025"],
-      githubLink: "https://github.com/VedantSingh4108/Open_Pit_Rockfall", // <-- Update this link
+      githubLink: "https://github.com/VedantSingh4108/Open_Pit_Rockfall",
       image:"/images/Rockfall.png"
     },
     {
-      title: "Cronos - AI -> Personalized AI Chatbot",
-      description: "Cronos AI: An intelligent personal voice assistant built with Python. Features offline hotword detection ('Cronos') using Porcupine, voice command recognition via Google Speech Recognition, and integration with the Google Gemini API for handling complex queries. Capable of opening local applications and websites, providing the current time and date, and answering natural language questions.",
+      title: "Cronos - Personalized AI Chatbot",
+      description: "Cronos AI: An intelligent personal voice assistant built with Python. Features offline hotword detection ('Cronos') using Porcupine, voice command recognition via Google Speech Recognition, and integration with the Google Gemini API for handling complex queries.",
       tags: ["Python", "AI", "NLP"],
       githubLink: "https://github.com/VedantSingh4108/Cronos-AI",
       image:"/images/Chatbot.png"
     },
     {
       title: "Diabetes Predictor using Machine Learning",
-      description: "Built a machine learning pipeline to predict diabetes onset using the PIMA Indians Diabetes dataset. ADDRESSED critical data issues like missing values (imputed medians) and class imbalance (SMOTE). Benchmarked Logistic Regression (71% accuracy) against Random Forest (77% accuracy) to demonstrate the necessity of non-linear modeling for health data.  Key Highlight: Went beyond simple prediction by conducting a comparative study on Model Explainability (XAI). Demonstrated the mathematical instability of LIME (low fidelity scores) and implemented SHAP (Shapley Additive Explanations) to provide robust, game-theoretic explanations for feature importance (identifying Glucose, BMI, and Age as top drivers).",
+      description: "Built a machine learning pipeline to predict diabetes onset using the PIMA Indians Diabetes dataset. Addressed critical data issues like missing values and class imbalance (SMOTE). Implemented SHAP (Shapley Additive Explanations) to provide robust explanations for feature importance.",
       tags: ["Python", "Machine Learning", "Pandas", "Scikit-Learn","Lime-Shap Analysis"],
-      githubLink: "https://github.com/VedantSingh4108/Diabetes-predictor",// <-- Update this link
+      githubLink: "https://github.com/VedantSingh4108/Diabetes-predictor",
       image:"/images/Diabetes.png"
     },
     {
@@ -311,15 +323,16 @@ const Education = () => {
       title: "Microsoft Azure AI Associate",
       issuer: "Microsoft",
       description: "Validated expertise in designing and deploying AI solutions on Azure.",
-      link: "https://drive.google.com/file/d/1c9y_D8OrfbavlCWqSW7IuVRVSM9iv4TH/view?usp=sharing" // Add your actual certificate link here
+      link: "https://drive.google.com/file/d/1c9y_D8OrfbavlCWqSW7IuVRVSM9iv4TH/view?usp=sharing" 
     },
     {
       title: "Spoken Tutorial Programming Test",
       issuer: "IIT Bombay",
       description: "IIT Bombay Certified (2024) in Python, C, and C++.",
-      link: "https://drive.google.com/file/d/1b95kU_xwlv0jwmaMoVefmgDZaQZ66nhj/view?usp=sharing" // Add your actual certificate link here
+      link: "https://drive.google.com/file/d/1b95kU_xwlv0jwmaMoVefmgDZaQZ66nhj/view?usp=sharing" 
     }
   ];
+
   return (
     <section id="education" className="education-section">
       <div className="container">
@@ -328,7 +341,6 @@ const Education = () => {
         </h2>
         <div className="education-grid">
           
-          {/* Education Column */}
           <div className="education-column">
             <h3 className="education-column-title">
               <GraduationCap size={28} style={{ marginRight: '12px', color: '#60a5fa' }} />
@@ -353,7 +365,6 @@ const Education = () => {
             </div>
           </div>
 
-          {/* Achievements & Certifications Column */}
           <div className="education-column">
             <h3 className="education-column-title">
               <Award size={28} style={{ marginRight: '12px', color: '#60a5fa' }} />
@@ -361,8 +372,7 @@ const Education = () => {
             </h3>
             <div className="certifications-list">
               
-              {/* --- HACKATHON ADDITION (Highlighted) --- */}
-              <div className="certification-item" style={{ 
+              <div className="certification-item hackathon-highlight" style={{ 
                 background: 'rgba(96, 165, 250, 0.1)', 
                 padding: '16px', 
                 borderRadius: '8px',
@@ -373,12 +383,11 @@ const Education = () => {
                 <div style={{ width: '100%' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <h4 className="certification-title">2nd Rank - International Online NetSim 24hrs Hackathon</h4>
-                    
-                    {/* --- LINK ADDED HERE --- */}
                     <a 
-                      href="https://drive.google.com/file/d/1xSt1RrKPaiIFsJ0zj5Ap9Fd5L9qBld5f/view?usp=sharing" // <--- Paste link here
+                      href="https://drive.google.com/file/d/1xSt1RrKPaiIFsJ0zj5Ap9Fd5L9qBld5f/view?usp=sharing" 
                       target="_blank" 
                       rel="noopener noreferrer" 
+                      className="verify-link"
                       style={{ 
                         color: '#60a5fa', 
                         display: 'flex', 
@@ -391,10 +400,8 @@ const Education = () => {
                     >
                       View Cert <ExternalLink size={14} style={{ marginLeft: '4px' }} />
                     </a>
-                    {/* ----------------------- */}
-
                   </div>
-                  <p className="certification-description" style={{ color: '#e5e7eb', marginBottom: '4px'}}>
+                  <p className="certification-description" style={{ color: 'var(--color-text-primary)', opacity: 0.8, marginBottom: '4px'}}>
                      NetSim Simulation Challenge
                   </p>
                   <p className="certification-description">
@@ -402,18 +409,15 @@ const Education = () => {
                   </p>
                 </div>
               </div>
-              {/* --- END HACKATHON --- */}
 
-              {/* Render Certifications from Data List */}
               {certList.map((cert, index) => (
                 <div key={index} className="certification-item" style={{ padding: '8px 0' }}>
-                  <CheckCircle size={20} style={{ flexShrink: 0, marginRight: '12px', marginTop: '4px', color: '#4ade80' }} />
+                  <CheckCircle size={20} style={{ flexShrink: 0, marginRight: '12px', marginTop: '4px', color: 'var(--color-success)' }} />
                   <div style={{ width: '100%' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                       <h4 className="certification-title">{cert.title}</h4>
-                      {/* Optional Link to Credential */}
                       {cert.link && (
-                        <a href={cert.link} target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', display: 'flex', alignItems: 'center', fontSize: '0.75rem', marginLeft: '8px' }}>
+                        <a href={cert.link} target="_blank" rel="noopener noreferrer" className="verify-link" style={{ color: '#60a5fa', display: 'flex', alignItems: 'center', fontSize: '0.75rem', marginLeft: '8px' }}>
                           Verify <ExternalLink size={12} style={{ marginLeft: '4px' }} />
                         </a>
                       )}
@@ -433,48 +437,34 @@ const Education = () => {
 };
 
 // --- COMPONENT: Contact ---
-// --- COMPONENT: Contact ---
 const Contact = () => {
-  // Logic to handle copying and changing the text
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("vedantsingh4108@gmail.com");
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    setTimeout(() => setCopied(false), 2000); 
   };
 
   return (
     <section id="contact" className="contact-section">
       <div className="container contact-container">
-        <h2 className="section-title">
-          Get In Touch
-        </h2>
+        <h2 className="section-title">Get In Touch</h2>
         <p className="contact-description">
           I'm currently seeking new opportunities. My inbox is always open, whether you have a question or just want to say hi.
         </p>
         <div className="contact-buttons">
-          
-          {/* --- NEW BUTTON CODE STARTS HERE --- */}
           <button
             onClick={handleCopyEmail}
             className="button button-primary"
-            style={{ minWidth: '150px' }} // Keeps button size stable
+            style={{ minWidth: '150px' }} 
           >
             {copied ? (
-              <>
-                <Check size={20} style={{ marginRight: '8px' }} />
-                Copied!
-              </>
+              <><Check size={20} style={{ marginRight: '8px' }} />Copied!</>
             ) : (
-              <>
-                <Copy size={20} style={{ marginRight: '8px' }} />
-                Copy Email
-              </>
+              <><Copy size={20} style={{ marginRight: '8px' }} />Copy Email</>
             )}
           </button>
-          {/* --- NEW BUTTON CODE ENDS HERE --- */}
-
           <a
             href="https://linkedin.com/in/vedantsingh0841"
             target="_blank"
@@ -489,6 +479,7 @@ const Contact = () => {
     </section>
   );
 };
+
 // --- COMPONENT: Footer ---
 const Footer = () => {
   return (
@@ -514,11 +505,38 @@ const Footer = () => {
 };
 
 // --- MAIN APP COMPONENT ---
-// This brings all the components together.
 export default function App() {
+  // Theme State (default dark)
+  const [theme, setTheme] = useState('dark');
+  // Notification State
+  const [showThemeNotif, setShowThemeNotif] = useState(true);
+
+  // Apply theme to the document HTML tag so CSS can pick it up
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  // Auto-hide the notification after 6 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowThemeNotif(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setShowThemeNotif(false); // Hide the notification instantly when clicked
+  };
+
   return (
     <div className="app-wrapper">
-      <Navbar />
+      <Navbar 
+        theme={theme} 
+        toggleTheme={toggleTheme} 
+        showThemeNotif={showThemeNotif}
+        dismissNotif={() => setShowThemeNotif(false)}
+      />
       <main>
         <Hero />
         <Skills />

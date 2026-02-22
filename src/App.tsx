@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Github, 
   Linkedin, 
@@ -18,8 +18,24 @@ import {
   Moon   
 } from 'lucide-react';
 
+// --- TYPESCRIPT DEFINITIONS ---
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  githubLink: string;
+  image: string;
+};
+
+interface NavbarProps {
+  theme: string;
+  toggleTheme: () => void;
+  showThemeNotif: boolean;
+  dismissNotif: () => void;
+}
+
 // --- COMPONENT: Navbar ---
-const Navbar = ({ theme, toggleTheme, showThemeNotif, dismissNotif }) => {
+const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, showThemeNotif, dismissNotif }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -36,9 +52,7 @@ const Navbar = ({ theme, toggleTheme, showThemeNotif, dismissNotif }) => {
         
         {/* Logo/Name */}
         <div className="navbar-brand">
-          <a href="#">
-            Vedant Singh
-          </a>
+          <a href="#">Vedant Singh</a>
         </div>
 
         {/* Desktop Nav Links */}
@@ -127,12 +141,8 @@ const Hero = () => {
       <div className="container hero-container">
         
         <div className="hero-content">
-          <h1 className="hero-headline">
-            Vedant Singh
-          </h1>
-          <h2 className="hero-subheadline">
-            Electronics & Computer Engineer
-          </h2>
+          <h1 className="hero-headline">Vedant Singh</h1>
+          <h2 className="hero-subheadline">Electronics & Computer Engineer</h2>
           <p className="hero-description">
             B.Tech student at VIT Chennai (9.14 CGPA) with a passion for Java, Data Science, and creating optimized, real-world solutions with AI.
           </p>
@@ -153,12 +163,8 @@ const Hero = () => {
           </div>
 
           <div className="hero-buttons">
-            <a href="#projects" className="button button-primary">
-              My Projects
-            </a>
-            <a href="#contact" className="button button-secondary">
-              Contact Me
-            </a>
+            <a href="#projects" className="button button-primary">My Projects</a>
+            <a href="#contact" className="button button-secondary">Contact Me</a>
           </div>
         </div>
 
@@ -202,19 +208,14 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <h2 className="section-title">
-          My Tech Stack
-        </h2>
+        <h2 className="section-title">My Tech Stack</h2>
         <div className="skills-grid">
           {skillCategories.map((category) => (
             <div key={category.title} className="skill-category-card">
               <h3 className="skill-category-title">{category.title}</h3>
               <div className="skill-tags">
                 {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="skill-tag"
-                  >
+                  <span key={skill} className="skill-tag">
                     {skill}
                   </span>
                 ))}
@@ -228,8 +229,7 @@ const Skills = () => {
 };
 
 // --- COMPONENT: Project Card ---
-// Removed TypeScript types here
-const ProjectCard = ({ project }) => {
+const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   return (
     <div className="project-card">
       <div className="project-card-visual" style={{ padding: 0, overflow: 'hidden' }}>
@@ -268,8 +268,7 @@ const ProjectCard = ({ project }) => {
 
 // --- COMPONENT: Projects ---
 const Projects = () => {
-  // Removed TypeScript types here
-  const projectData = [
+  const projectData: Project[] = [
     {
       title: "RockGuard AI: Rockfall Prediction System",
       description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas, using synthetic data to train the model.",
@@ -303,9 +302,7 @@ const Projects = () => {
   return (
     <section id="projects" className="projects-section">
       <div className="container">
-        <h2 className="section-title">
-          Featured Projects
-        </h2>
+        <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
           {projectData.map((project) => (
             <ProjectCard key={project.title} project={project} />
@@ -336,9 +333,7 @@ const Education = () => {
   return (
     <section id="education" className="education-section">
       <div className="container">
-        <h2 className="section-title">
-          Education & Credentials
-        </h2>
+        <h2 className="section-title">Education & Credentials</h2>
         <div className="education-grid">
           
           <div className="education-column">
@@ -506,17 +501,13 @@ const Footer = () => {
 
 // --- MAIN APP COMPONENT ---
 export default function App() {
-  // Theme State (default dark)
   const [theme, setTheme] = useState('dark');
-  // Notification State
   const [showThemeNotif, setShowThemeNotif] = useState(true);
 
-  // Apply theme to the document HTML tag so CSS can pick it up
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Auto-hide the notification after 6 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowThemeNotif(false);
@@ -526,7 +517,7 @@ export default function App() {
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-    setShowThemeNotif(false); // Hide the notification instantly when clicked
+    setShowThemeNotif(false); 
   };
 
   return (

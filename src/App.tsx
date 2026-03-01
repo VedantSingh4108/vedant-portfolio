@@ -390,7 +390,7 @@ const Education = () => {
                 <div className="timeline-content">
                   <h4 className="timeline-title">VIT Chennai</h4>
                   <p className="timeline-subtitle">B.Tech, Electronics & Computer Engineering</p>
-                  <p className="timeline-date">Aug 2023 - Present | CGPA: 9.09</p>
+                  <p className="timeline-date">Aug 2023 - Present | CGPA: 9.14</p>
                 </div>
               </div>
               <div className="timeline-item">

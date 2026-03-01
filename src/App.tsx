@@ -25,6 +25,7 @@ type Project = {
   tags: string[];
   githubLink: string;
   image: string;
+  workingLink?: string;
 };
 
 interface NavbarProps {
@@ -136,6 +137,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, showThemeNotif, dis
 
 // --- COMPONENT: Hero ---
 const Hero = () => {
+  const [imgFailed, setImgFailed] = useState(false);
+
   return (
     <section id="about" className="hero-section">
       <div className="container hero-container">
@@ -144,9 +147,10 @@ const Hero = () => {
           <h1 className="hero-headline">Vedant Singh</h1>
           <h2 className="hero-subheadline">Electronics & Computer Engineer</h2>
           <p className="hero-description">
-            B.Tech student at VIT Chennai (9.14 CGPA) with a passion for Java, Data Science, and creating optimized, real-world solutions with AI.
+            B.Tech student at VIT Chennai (9.14 CGPA) with a passion for JAVA, Data Science, and creating optimized, real-world solutions with AI.
           </p>
           
+          {/* Social Links */}
           <div className="hero-socials">
             <a href="https://github.com/VedantSingh4108" target="_blank" rel="noopener noreferrer">
               <Github size={28} />
@@ -162,6 +166,7 @@ const Hero = () => {
             </a>
           </div>
 
+          {/* CTA Buttons */}
           <div className="hero-buttons">
             <a href="#projects" className="button button-primary">My Projects</a>
             <a href="#contact" className="button button-secondary">Contact Me</a>
@@ -171,11 +176,18 @@ const Hero = () => {
         {/* Right Side: Image */}
         <div className="hero-image-wrapper">
           <div className="hero-image-blob">
-            <img 
-              src="/images/profile.jpg" 
-              alt="Vedant Singh" 
-              className="hero-img"
-            />
+            {!imgFailed ? (
+              <img 
+                src="/images/Profile.jpg" 
+                alt="Vedant Singh" 
+                className="hero-img"
+                onError={() => setImgFailed(true)}
+              />
+            ) : (
+              <div className="hero-img-fallback">
+                <span>Vedant<br/>Singh</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -189,33 +201,39 @@ const Skills = () => {
   const skillCategories = [
     { 
       title: "Programming Languages", 
-      skills: ["Python", "C/C++", "Java", "HTML", "CSS", "JavaScript"] 
+      skills: ["Python", "C/C++", "Java", "JavaScript", "OracleSQL/MySQL"] 
     },
     { 
-      title: "Data Science & Analytics", 
-      skills: ["Oracle", "SQL","Python Data Science Stack","Machine Learning"] 
+      title: "Data Science", 
+      skills: ["Pandas & NumPy", "Scikit-Learn", "Matplotlib & Seaborn", "Statistical Analysis(R)","LIME & SHAP"] 
     },
     { 
-      title: "Cloud & AI", 
-      skills: ["Microsoft Azure", "Azure AI","AWS Basics"] 
+      title: "AI & Machine Learning", 
+      skills: ["Machine Learning", "Deep Learning", "NLP", "NLTK","SVM"] 
     },
     { 
-      title: "UI/UX", 
-      skills: ["Figma","React","NodeJS"] 
+      title: "Web,Cloud & Tools", 
+      skills: ["HTML/CSS","React & NodeJS","Streamlit","Microsoft Azure","AWS Basics","Git & GitHub"] 
     },
+    
   ];
 
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <h2 className="section-title">My Tech Stack</h2>
+        <h2 className="section-title">
+          My Tech Stack
+        </h2>
         <div className="skills-grid">
           {skillCategories.map((category) => (
             <div key={category.title} className="skill-category-card">
               <h3 className="skill-category-title">{category.title}</h3>
               <div className="skill-tags">
                 {category.skills.map((skill) => (
-                  <span key={skill} className="skill-tag">
+                  <span
+                    key={skill}
+                    className="skill-tag"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -251,16 +269,36 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             </span>
           ))}
         </div>
+
         
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-card-link"
-        >
-          View on GitHub
-          <ArrowUpRight size={16} style={{ marginLeft: '4px' }} />
-        </a>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+          {/* GitHub Link (Always shows) */}
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-card-link"
+            style={{ marginTop: '0' }}
+          >
+            View on GitHub
+            <Github size={16} style={{ marginLeft: '6px' }} />
+          </a>
+
+          {/* Working Link (Only shows if you added it to the project data) */}
+          {project.workingLink && (
+            <a
+              href={project.workingLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-link"
+              style={{ marginTop: '0', color: 'var(--color-brand)' }}
+            >
+              Live Demo
+              <ArrowUpRight size={16} style={{ marginLeft: '2px' }} />
+            </a>
+          )}
+        </div>
+
       </div>
     </div>
   );
@@ -270,11 +308,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 const Projects = () => {
   const projectData: Project[] = [
     {
-      title: "RockGuard AI: Rockfall Prediction System",
-      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas, using synthetic data to train the model.",
-      tags: ["AI/ML", "Python", "Data Analysis", "SIH 2025"],
-      githubLink: "https://github.com/VedantSingh4108/Open_Pit_Rockfall",
-      image:"/images/Rockfall.png"
+      title: "Real-Time Sentiment Analysis Web App",
+      description: "Built a real-time sentiment analysis web app using Streamlit and deployed it to the cloud. Engineered a custom NLP pipeline (NLTK, TF-IDF) with idiom and negation detection, and trained a Linear SVM on 150,000+ reviews to achieve 82.17% accuracy",
+      tags: ["NLP", "Python", "Streamlit", "TF-IDF", "SVM"],
+      githubLink: "https://github.com/VedantSingh4108/sentiment-api",
+      image:"/images/Sentiment.png",
+      workingLink: "https://sentiment-api-7e96wp3akqlayqhcmtd8xv.streamlit.app/"
     },
     {
       title: "Cronos - Personalized AI Chatbot",
@@ -291,18 +330,20 @@ const Projects = () => {
       image:"/images/Diabetes.png"
     },
     {
-      title: "Traffic Management Simulation",
-      description: "Interactive C++ simulation of a city grid with an adaptive algorithm to optimize traffic signal switching.",
-      tags: ["C++", "OOP", "Data Structures", "Optimization"],
-      githubLink: "https://github.com/VedantSingh4108/Traffic-Management-System" ,
-      image:"/images/Traffic.png"
+      title: "RockGuard AI: Rockfall Prediction System",
+      description: "AI-powered system developed for Smart India Hackathon 2025 to predict rockfall events and improve safety in vulnerable areas, using synthetic data to train the model.",
+      tags: ["AI/ML", "Python", "Data Analysis", "SIH 2025"],
+      githubLink: "https://github.com/VedantSingh4108/Open_Pit_Rockfall",
+      image:"/images/Rockfall.png"
     },
   ];
 
   return (
     <section id="projects" className="projects-section">
       <div className="container">
-        <h2 className="section-title">Featured Projects</h2>
+        <h2 className="section-title">
+          Featured Projects
+        </h2>
         <div className="projects-grid">
           {projectData.map((project) => (
             <ProjectCard key={project.title} project={project} />
@@ -320,20 +361,22 @@ const Education = () => {
       title: "Microsoft Azure AI Associate",
       issuer: "Microsoft",
       description: "Validated expertise in designing and deploying AI solutions on Azure.",
-      link: "https://drive.google.com/file/d/1c9y_D8OrfbavlCWqSW7IuVRVSM9iv4TH/view?usp=sharing" 
+      link: "#" 
     },
     {
       title: "Spoken Tutorial Programming Test",
       issuer: "IIT Bombay",
       description: "IIT Bombay Certified (2024) in Python, C, and C++.",
-      link: "https://drive.google.com/file/d/1b95kU_xwlv0jwmaMoVefmgDZaQZ66nhj/view?usp=sharing" 
+      link: "#" 
     }
   ];
 
   return (
     <section id="education" className="education-section">
       <div className="container">
-        <h2 className="section-title">Education & Credentials</h2>
+        <h2 className="section-title">
+          Education & Credentials
+        </h2>
         <div className="education-grid">
           
           <div className="education-column">
@@ -347,7 +390,7 @@ const Education = () => {
                 <div className="timeline-content">
                   <h4 className="timeline-title">VIT Chennai</h4>
                   <p className="timeline-subtitle">B.Tech, Electronics & Computer Engineering</p>
-                  <p className="timeline-date">Aug 2023 - Present | CGPA: 9.14</p>
+                  <p className="timeline-date">Aug 2023 - Present | CGPA: 9.09</p>
                 </div>
               </div>
               <div className="timeline-item">
@@ -376,31 +419,12 @@ const Education = () => {
               }}>
                 <Trophy size={24} style={{ flexShrink: 0, marginRight: '12px', marginTop: '4px', color: '#facc15' }} />
                 <div style={{ width: '100%' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <h4 className="certification-title">2nd Rank - International Online NetSim 24hrs Hackathon</h4>
-                    <a 
-                      href="https://drive.google.com/file/d/1xSt1RrKPaiIFsJ0zj5Ap9Fd5L9qBld5f/view?usp=sharing" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="verify-link"
-                      style={{ 
-                        color: '#60a5fa', 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        fontSize: '0.85rem', 
-                        marginLeft: '10px',
-                        fontWeight: '500',
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      View Cert <ExternalLink size={14} style={{ marginLeft: '4px' }} />
-                    </a>
-                  </div>
+                  <h4 className="certification-title">2nd Rank - [Hackathon Name]</h4>
                   <p className="certification-description" style={{ color: 'var(--color-text-primary)', opacity: 0.8, marginBottom: '4px'}}>
                      NetSim Simulation Challenge
                   </p>
                   <p className="certification-description">
-                    Designed and simulated networks using NetSim, optimizing network performance parameter and secured 2nd place.
+                    Designed and simulated a [Scenario/Topic] using NetSim, optimizing network performance parameters.
                   </p>
                 </div>
               </div>
@@ -411,7 +435,7 @@ const Education = () => {
                   <div style={{ width: '100%' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                       <h4 className="certification-title">{cert.title}</h4>
-                      {cert.link && (
+                      {cert.link !== "#" && (
                         <a href={cert.link} target="_blank" rel="noopener noreferrer" className="verify-link" style={{ color: '#60a5fa', display: 'flex', alignItems: 'center', fontSize: '0.75rem', marginLeft: '8px' }}>
                           Verify <ExternalLink size={12} style={{ marginLeft: '4px' }} />
                         </a>
@@ -504,10 +528,12 @@ export default function App() {
   const [theme, setTheme] = useState('dark');
   const [showThemeNotif, setShowThemeNotif] = useState(true);
 
+  // Apply theme to HTML root
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  // Dismiss tooltip automatically
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowThemeNotif(false);

@@ -7,28 +7,40 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #9ca3af;
   --color-text-accent: #60a5fa; 
-  --color-brand: #60a5fa;
+  --color-brand: #3b82f6; 
   --color-tag-bg: #374151;
   --color-tag-text: #93c5fd;
   --color-success: #4ade80;
   --color-nav-bg: rgba(0, 0, 0, 0.7);
+  
+  /* Hero Glow specific to Dark Mode */
+  --color-hero-glow: rgba(96, 165, 250, 0.35);
+
+  /* No shadow needed in dark mode to keep it sleek */
+  --shadow-card: none; 
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* LIGHT THEME OVERRIDES */
 [data-theme='light'] {
-  --color-bg-dark: #f9fafb; /* Very light gray */
-  --color-bg-light: #ffffff; /* Pure white */
-  --color-border: #e5e7eb;
-  --color-text-primary: #111827; /* Near black text */
-  --color-text-secondary: #4b5563; /* Medium gray text */
+  --color-bg-dark: #fcfbf9; /* Pearl White (Main Background) */
+  --color-bg-light: #f3f0e9; /* Soft Beige (For alternate sections like Skills & Cards) */
+  --color-border: #e8e6e1; /* Soft matching border */
+  --color-text-primary: #1c1917; /* Warm near-black text */
+  --color-text-secondary: #57534e; /* Warm medium-gray text */
   --color-text-accent: #2563eb; /* Deeper blue for contrast */
   --color-brand: #3b82f6;
-  --color-tag-bg: #eff6ff;
+  --color-tag-bg: #e9e6df; /* Beige matching tag background */
   --color-tag-text: #1d4ed8;
-  --color-success: #16a34a; /* Darker green */
-  --color-nav-bg: rgba(255, 255, 255, 0.85);
+  --color-success: #16a34a; 
+  --color-nav-bg: rgba(252, 251, 249, 0.85); 
+  
+  /* Hero Glow specific to Light Mode (Much softer) */
+  --color-hero-glow: rgba(59, 130, 246, 0.12);
+  
+  /* Soft, elegant drop shadow to make cards pop off the beige background */
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.08); 
 }
 
 /* Global resets */
@@ -46,7 +58,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade when switching themes */
+  transition: background-color 0.4s ease, color 0.4s ease; 
 }
 
 body {
@@ -67,7 +79,7 @@ img, svg {
 /* --- 2. Reusable Components --- */
 .container {
   width: 100%;
-  max-width: 1152px;
+  max-width: 1350px; /* INCREASED: Makes the website much wider on big screens */
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
@@ -79,23 +91,28 @@ img, svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.75rem; /* Slightly larger padding */
   border: 1px solid transparent;
-  font-size: 1rem;
+  font-size: 1.05rem; /* Slightly larger text */
   font-weight: 500;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem; 
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-align: center;
 }
 
+/* Upgraded Primary Button (Blue in both modes) */
 .button-primary {
-  background-color: var(--color-text-primary);
-  color: var(--color-bg-dark);
-  border-color: var(--color-text-primary);
+  background-color: var(--color-brand);
+  color: #ffffff !important; 
+  border-color: var(--color-brand);
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39); 
 }
 .button-primary:hover {
-  opacity: 0.8;
+  background-color: var(--color-text-accent); 
+  border-color: var(--color-text-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.23); 
 }
 
 .button-secondary {
@@ -126,13 +143,13 @@ img, svg {
   background-color: var(--color-nav-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  height: 4.5rem; 
 }
 .navbar-brand a {
   font-size: 1.5rem;
@@ -186,10 +203,10 @@ img, svg {
 /* --- THEME NOTIFICATION TOOLTIP --- */
 .theme-tooltip {
   position: absolute;
-  top: 130%; /* Pushes it just below the icon */
+  top: 130%; 
   right: 0;
   width: 220px;
-  background-color: #3b82f6; /* Hardcoded blue so it always pops */
+  background-color: #3b82f6; 
   color: #ffffff;
   padding: 12px;
   border-radius: 8px;
@@ -199,12 +216,11 @@ img, svg {
   z-index: 100;
   text-align: left;
 }
-/* The little triangle pointing up */
 .theme-tooltip::before {
   content: '';
   position: absolute;
   top: -6px;
-  right: 18px; /* Aligns with the toggle icon */
+  right: 18px; 
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -248,7 +264,7 @@ img, svg {
 }
 .navbar-menu-mobile {
   position: absolute;
-  top: 4rem;
+  top: 4.5rem;
   left: 0;
   width: 100%;
   background-color: var(--color-bg-dark);
@@ -257,7 +273,7 @@ img, svg {
   flex-direction: column;
   padding: 1rem 1.5rem;
   gap: 0.5rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 .nav-link-mobile {
   font-size: 1rem;
@@ -274,9 +290,6 @@ img, svg {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.75rem;
-  background-color: var(--color-text-primary);
-  color: var(--color-bg-dark);
-  border-radius: 0.375rem;
   font-weight: 500;
   text-align: center;
 }
@@ -289,7 +302,7 @@ img, svg {
   align-items: center; 
   min-height: 80vh; 
   background-color: var(--color-bg-dark);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 
 .hero-container {
@@ -311,14 +324,14 @@ img, svg {
 }
 
 .hero-image-blob {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%; 
   overflow: hidden;
-  padding: 3px; /* Controls border thickness */
+  padding: 3px; 
   background: linear-gradient(135deg, #60a5fa, #3b82f6, #1d4ed8); 
-  /* Wide, glowing spread */
-  box-shadow: 0 0 50px 10px rgba(96, 165, 250, 0.3); 
+  box-shadow: 0 0 50px 10px var(--color-hero-glow); 
+  transition: box-shadow 0.4s ease;
 }
 
 .hero-img {
@@ -327,6 +340,22 @@ img, svg {
   object-fit: cover;
   border-radius: 50%;
   background-color: var(--color-bg-dark);
+}
+
+/* FALLBACK IMAGE STYLE */
+.hero-img-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--color-bg-light); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
 }
 
 .hero-headline {
@@ -349,6 +378,7 @@ img, svg {
   margin-left: auto;
   margin-right: auto;
 }
+
 .hero-socials {
   display: flex;
   justify-content: center;
@@ -357,17 +387,26 @@ img, svg {
 }
 .hero-socials a {
   color: var(--color-text-secondary);
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
 }
 .hero-socials a:hover {
   color: var(--color-text-primary);
+  transform: translateY(-2px); 
 }
+/* FIXED: Forces icons to always be big */
+.hero-socials svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
 .hero-buttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
 }
 
 /* --- Skills Section --- */
@@ -375,7 +414,7 @@ img, svg {
   background-color: var(--color-bg-light);
   padding-top: 6rem;
   padding-bottom: 6rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 .skills-grid {
   display: grid;
@@ -383,11 +422,16 @@ img, svg {
   gap: 2rem;
 }
 .skill-category-card {
-  background-color: var(--color-bg-dark);
+  background-color: var(--color-bg-dark); 
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem; 
   border: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--shadow-card); 
+  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
 }
 .skill-category-title {
   font-size: 1.25rem;
@@ -403,7 +447,7 @@ img, svg {
 .skill-tag {
   background-color: var(--color-tag-bg);
   color: var(--color-tag-text);
-  padding: 0.25rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
@@ -418,7 +462,7 @@ img, svg {
   background-color: var(--color-bg-dark);
   padding-top: 6rem;
   padding-bottom: 6rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 .projects-grid {
   display: grid;
@@ -426,19 +470,20 @@ img, svg {
   gap: 2rem;
 }
 .project-card {
-  background-color: var(--color-bg-light);
-  border-radius: 0.5rem;
+  background-color: var(--color-bg-light); 
+  border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card); 
   transition: all 0.3s ease;
 }
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-brand);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 .project-card-visual {
-  height: 12rem;
+  height: 14rem;
   background-color: var(--color-bg-dark);
   display: flex;
   align-items: center;
@@ -478,7 +523,7 @@ img, svg {
   background-color: var(--color-bg-light);
   padding-top: 6rem;
   padding-bottom: 6rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 .education-grid {
   display: grid;
@@ -565,7 +610,7 @@ img, svg {
   background-color: var(--color-bg-dark);
   padding-top: 6rem;
   padding-bottom: 6rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
 }
 .contact-container {
   max-width: 896px;
@@ -591,7 +636,7 @@ img, svg {
 .footer {
   background-color: var(--color-bg-light);
   border-top: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 .footer-container {
   display: flex;
@@ -612,10 +657,11 @@ img, svg {
 }
 .footer-socials a {
   color: var(--color-text-secondary);
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
 }
 .footer-socials a:hover {
   color: var(--color-text-primary);
+  transform: translateY(-2px);
 }
 
 /* --- 4. Responsive Media Queries --- */
@@ -642,15 +688,15 @@ img, svg {
   }
   .hero-content {
     flex: 1;
-    max-width: 600px;
+    max-width: 750px; /* INCREASED: Lets the text stretch wider before wrapping */
   }
   .hero-image-wrapper {
     flex: 1;
     justify-content: flex-end; 
   }
   .hero-image-blob {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
   }
   .hero-headline {
     font-size: 4rem;
@@ -689,8 +735,24 @@ img, svg {
   }
 }
 
+/* LARGER SCREENS (1024px and up) */
 @media (min-width: 1024px) {
   .skills-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Scale everything up on larger screens to prevent it feeling "shrunk" */
+  .hero-container {
+    gap: 6rem;
+  }
+  .hero-image-blob {
+    width: 400px;
+    height: 400px;
+  }
+  .hero-headline {
+    font-size: 4.5rem;
+  }
+  .hero-subheadline {
+    font-size: 2.5rem;
   }
 }

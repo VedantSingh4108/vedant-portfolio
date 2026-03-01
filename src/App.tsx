@@ -361,13 +361,13 @@ const Education = () => {
       title: "Microsoft Azure AI Associate",
       issuer: "Microsoft",
       description: "Validated expertise in designing and deploying AI solutions on Azure.",
-      link: "#" 
+      link: "https://drive.google.com/file/d/1c9y_D8OrfbavlCWqSW7IuVRVSM9iv4TH/view?usp=sharing" 
     },
     {
       title: "Spoken Tutorial Programming Test",
       issuer: "IIT Bombay",
       description: "IIT Bombay Certified (2024) in Python, C, and C++.",
-      link: "#" 
+      link: "https://drive.google.com/file/d/1b95kU_xwlv0jwmaMoVefmgDZaQZ66nhj/view?usp=sharing" 
     }
   ];
 
@@ -419,12 +419,31 @@ const Education = () => {
               }}>
                 <Trophy size={24} style={{ flexShrink: 0, marginRight: '12px', marginTop: '4px', color: '#facc15' }} />
                 <div style={{ width: '100%' }}>
-                  <h4 className="certification-title">2nd Rank - [Hackathon Name]</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <h4 className="certification-title">2nd Rank - International Online NetSim 24hrs Hackathon</h4>
+                    <a 
+                      href="https://drive.google.com/file/d/1xSt1RrKPaiIFsJ0zj5Ap9Fd5L9qBld5f/view?usp=sharing" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="verify-link"
+                      style={{ 
+                        color: '#60a5fa', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        fontSize: '0.85rem', 
+                        marginLeft: '10px',
+                        fontWeight: '500',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      View Cert <ExternalLink size={14} style={{ marginLeft: '4px' }} />
+                    </a>
+                  </div>
                   <p className="certification-description" style={{ color: 'var(--color-text-primary)', opacity: 0.8, marginBottom: '4px'}}>
                      NetSim Simulation Challenge
                   </p>
                   <p className="certification-description">
-                    Designed and simulated a [Scenario/Topic] using NetSim, optimizing network performance parameters.
+                    Designed and simulated networks using NetSim, optimizing network performance parameter and secured 2nd place.
                   </p>
                 </div>
               </div>

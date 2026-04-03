@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Github, 
   Linkedin, 
@@ -143,7 +144,12 @@ const Hero = () => {
     <section id="about" className="hero-section">
       <div className="container hero-container">
         
-        <div className="hero-content">
+        <motion.div 
+          className="hero-content"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1 className="hero-headline">Vedant Singh</h1>
           <h2 className="hero-subheadline">Electronics & Computer Engineer</h2>
           <p className="hero-description">
@@ -171,10 +177,15 @@ const Hero = () => {
             <a href="#projects" className="button button-primary">My Projects</a>
             <a href="#contact" className="button button-secondary">Contact Me</a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side: Image */}
-        <div className="hero-image-wrapper">
+        <motion.div 
+          className="hero-image-wrapper"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="hero-image-blob">
             {!imgFailed ? (
               <img 
@@ -189,7 +200,7 @@ const Hero = () => {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
@@ -221,12 +232,24 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <h2 className="section-title">
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
           My Tech Stack
-        </h2>
+        </motion.h2>
         <div className="skills-grid">
-          {skillCategories.map((category) => (
-            <div key={category.title} className="skill-category-card">
+          {skillCategories.map((category, index) => (
+            <motion.div 
+              key={category.title} 
+              className="skill-category-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+            >
               <h3 className="skill-category-title">{category.title}</h3>
               <div className="skill-tags">
                 {category.skills.map((skill) => (
@@ -238,7 +261,7 @@ const Skills = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -247,9 +270,15 @@ const Skills = () => {
 };
 
 // --- COMPONENT: Project Card ---
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   return (
-    <div className="project-card">
+    <motion.div 
+      className="project-card"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, margin: "-50px" }}
+    >
       <div className="project-card-visual" style={{ padding: 0, overflow: 'hidden' }}>
         <img 
           src={project.image} 
@@ -300,7 +329,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         </div>
 
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -341,12 +370,17 @@ const Projects = () => {
   return (
     <section id="projects" className="projects-section">
       <div className="container">
-        <h2 className="section-title">
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
           Featured Projects
-        </h2>
+        </motion.h2>
         <div className="projects-grid">
-          {projectData.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+          {projectData.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
       </div>
